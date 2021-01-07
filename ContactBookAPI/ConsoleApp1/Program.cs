@@ -12,35 +12,32 @@ namespace ConsoleApp1
             ValidateSentences();
         }
 
-        private static void ValidateSentences()
+        public static void ValidateSentences()
         {
             try
             {
-                String line;
                 Dictionary<string, int> wordList = new Dictionary<string, int>();
-
+                string inputFilename, outputFilename;
+                IOFileNamePath(out inputFilename, out outputFilename);
                 //Opens a file in read mode  
-
-                using (StreamReader file = new StreamReader("C:\\Users\\suganya.r\\Assignment\\ContactBookAPI\\ConsoleApp1\\data.txt"))
+                using (StreamReader file = new StreamReader(inputFilename))
                 {
-                    //Gets each line till end of file is reached  
-                    while ((line = file.ReadLine()) != null)
-                    {
-                        //Splits each line into words  
-                        String[] sentences = line.Split('.');
+                    String line = file.ReadToEnd();
 
-                        foreach (var sentence in sentences)
+                    //Splits each line into sentences  
+                    String[] sentences = line.Split('.');
+
+                    foreach (var sentence in sentences)
+                    {
+                        int vowelCount = 0;
+                        foreach (var c in sentence)
                         {
-                            int vowelCount = 0;
-                            foreach (var c in sentence)
+                            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U')
                             {
-                                if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
-                                {
-                                    vowelCount++;
-                                }
+                                vowelCount++;
                             }
-                            wordList.TryAdd(sentence, vowelCount);
                         }
+                        wordList.TryAdd(sentence, vowelCount);
                     }
 
                     foreach (var word in wordList.OrderByDescending(key => key.Value))
@@ -49,7 +46,7 @@ namespace ConsoleApp1
                     }
                 }
 
-                using (StreamWriter sw = new StreamWriter("C:\\Users\\suganya.r\\Assignment\\ContactBookAPI\\ConsoleApp1\\output.txt"))
+                using (StreamWriter sw = new StreamWriter(outputFilename))
                 {
                     foreach (var s in wordList.OrderByDescending(key => key.Value))
                     {
@@ -59,8 +56,14 @@ namespace ConsoleApp1
             }
             catch (Exception)
             {
-                Console.WriteLine("Error");
+                Console.WriteLine("invalid file");
             }
+        }
+
+        private static void IOFileNamePath(out string inputFilename, out string outputFilename)
+        {
+            inputFilename = @"C:\Users\suganya.r\Assignment\ContactBookAPI\ConsoleApp1\data.txt";
+            outputFilename = @"C:\Users\suganya.r\Assignment\ContactBookAPI\ConsoleApp1\output.txt";
         }
     }
 }

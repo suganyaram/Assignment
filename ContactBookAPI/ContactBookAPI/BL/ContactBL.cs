@@ -38,7 +38,7 @@ namespace ContactBookAPI.BL
         {
             try
             {
-                var query = $"SELECT c.id FROM c where c.firstname ='" + contact.FirstName + "' and c.phonenumber =" + contact.PhoneNumber + " ";
+                var query = $"SELECT c.id FROM c where c.firstname ='" + contact.FirstName + "' and c.phonenumber ='" + contact.PhoneNumber + "' ";
                 var result = await this.cosmosDBRepository.GetItemAsync(query);
                 if (result != null)
                 {
@@ -47,7 +47,7 @@ namespace ContactBookAPI.BL
                 var payload = new
                 {
                     firstname = contact.FirstName,
-                    lastname = contact.LastName,
+                    lastname = contact.LastName ?? string.Empty,
                     phonenumber = contact.PhoneNumber,
                 };
                 await cosmosDBRepository.CreateItemAsync(payload);
@@ -71,7 +71,7 @@ namespace ContactBookAPI.BL
                     {
                         id = id,
                         firstname = contact.FirstName,
-                        lastname = contact.LastName,
+                        lastname = contact?.LastName ?? string.Empty,
                         phonenumber = contact.PhoneNumber,
                     };
                     await cosmosDBRepository.UpdateItemAsync(id.ToString(), response);

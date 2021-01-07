@@ -40,7 +40,7 @@ namespace ContactBookAPI.BL
         {
             try
             {
-                var query = $"SELECT c.id FROM c where c.PhoneNumber = " + group.PhoneNumber + " and c.FirstName = '" + group.FirstName + "' ";
+                var query = $"SELECT c.id FROM c where c.PhoneNumber = '" + group.PhoneNumber + "' and c.FirstName = '" + group.FirstName + "' ";
                 var result = await this.contactGroupDBRepository.GetItemAsync(query);
                 if (result != null)
                 {
@@ -68,9 +68,9 @@ namespace ContactBookAPI.BL
                     {
                         id = id,
                         FirstName = contactGroup.FirstName,
-                        LastName = contactGroup.LastName,
+                        LastName = contactGroup.LastName ?? string.Empty,
                         PhoneNumber = contactGroup.PhoneNumber,
-                        AssociatedId = contactGroup.AssociatedId,
+                        AssociatedId = contactGroup.AssociatedId ?? 0,
                         IsContactGroup = contactGroup.IsContactGroup,
                     };
                     await contactGroupDBRepository.UpdateItemAsync(id.ToString(), response);

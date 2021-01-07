@@ -1,4 +1,8 @@
- Duis autem veleum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel willum lunombro dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat
- Ut wisi enim ad minim veniam, quis nostrud exercitation ulliam corper suscipit lobortis nisl ut aliquip ex ea commodo consequat
+ 
+ That is in the output file – The first sentence contains the most number of vowels, the second contains the second highest number of vowels and so on until the last sentence which contains the least number of vowels
+Write a function that takes this file as an input and outputs/writes another file that contains sentences in the decreasing order of number of vowels in the sentence
+ The Contact Book API should also provide support for creating and managing Contact Groups
+ The API should not accept duplicate contact groups
 
+In addition, to contacts
+ 
